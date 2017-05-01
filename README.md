@@ -17,7 +17,7 @@ I don't use submodules since this is research and new things keep coming in dail
 ### Train the Texture Net
 
 ```
-th $POSTERIZE_STYLER/train.lua -data coco  -style_image ../neural-style/examples/inputs/frida_kahlo.jpg -style_size 600 -image_size 512 -model johnson -batch_size 2 -learning_rate 1e-2 -style_weight 10 -style_layers relu1_2,relu2_2,relu3_2,relu4_2 -content_layers relu4_2 -num_iterations 3000
+th $POSTERIZE_STYLER/train.lua -data coco  -style_image <path-to-style-image> -style_size 600 -image_size 512 -model johnson -batch_size 2 -learning_rate 1e-2 -style_weight 10 -style_layers relu1_2,relu2_2,relu3_2,relu4_2 -content_layers relu4_2 -num_iterations 3000
 ```
 
 

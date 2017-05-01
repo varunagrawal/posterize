@@ -73,8 +73,11 @@ for i in range(int(sys.argv[1])):
     else:
         dst = cv2.imread("output.jpg")
     src = cv2.imread(osp.join("foreground", "seg_image_{0}.jpg".format(i+1)))
-    mask = cv2.imread("mask_{0}.jpg".format(i+1))
-    # mask = cv2.imread("seg_patch.jpg")
+    try:
+        mask = cv2.imread(osp.join("masks", "mask_{0}.jpg".format(i+1)))
+        # mask = cv2.imread("seg_patch.jpg")
+    except:
+        continue
 
     # print(mask.shape)
 

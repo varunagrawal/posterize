@@ -24,7 +24,7 @@ num_masks = int(sys.argv[2])
 
 
 for i in range(num_masks):
-    mask = ndimage.imread("mask_{0}.jpg".format(i+1))
+    mask = ndimage.imread(osp.join("masks", "mask_{0}.jpg".format(i+1)))
 
     fore_img = subtract_mask(img, mask)
     back_img = subtract_mask(img, mask, foreground=False)
