@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from laplacian_blending import run_blend
 import os.path as osp
+import sys
 
 
 def poisson_blend(fore, back, mask):
@@ -65,13 +66,13 @@ def laplacian_blend(white_image, black_image, mask):
         cv2.imwrite(name + '.png', viz_pyramid(stack))
     
 
-for i in range(5):
+for i in range(int(sys.argv[1])):
     # Read images
     if i == 0:
         dst = cv2.imread("stylized.jpg")
     else:
         dst = cv2.imread("output.jpg")
-    src = cv2.imread(osp.join("foreground", "seg_image_{0}.jpg".format(i+1))
+    src = cv2.imread(osp.join("foreground", "seg_image_{0}.jpg".format(i+1)))
     mask = cv2.imread("mask_{0}.jpg".format(i+1))
     # mask = cv2.imread("seg_patch.jpg")
 
