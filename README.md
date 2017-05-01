@@ -4,6 +4,39 @@ Semantic Style Transfer
 Semantic Segmentation - [Sharpmask](https://github.com/facebookresearch/deepmask)
 Style Transfer - [Texture Nets](https://github.com/DmitryUlyanov/texture_nets)
 
+
+## How To
+
+### Setup the Project
+
+Clone the repository and then clone my updated version of [deepmask](https://github.com/varunagrawal/deepmask) and [texture_nets](https://github.com/DmitryUlyanov/texture_nets) repositories inside the project folder.
+
+I don't use submodules since this is research and new things keep coming in daily.
+
+
+### Train the Texture Net
+
+```
+th train.lua -data coco  -style_image ../neural-style/examples/inputs/frida_kahlo.jpg -style_size 600 -image_size 512 -model johnson -batch_size 2 -learning_rate 1e-2 -style_weight 10 -style_layers relu1_2,relu2_2,relu3_2,relu4_2 -content_layers relu4_2 -num_iterations 3000
+```
+
+
+### Stylize the Image
+
+```
+th test.lua -input_image input.jpg -model_t7 data/checkpoints/model_3000.t7
+```
+
+### Compute the Segmentation Masks
+
+This saves the masks and generates a file called `num_masks` which has the number of masks generated.
+
+We use the Sharpmask algorithm.
+
+```shell 
+th computeProposals.lua pretrained/sharpmask -img data/steven.jpg
+```
+
 ## Key Objective
 
 Get the style transfer to work especially well on face images and self-portraits (selfies).
