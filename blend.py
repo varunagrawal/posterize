@@ -38,35 +38,9 @@ def poisson_blend(fore, back, mask):
     # print("Poisson Blending done.")
     return output
 
-def viz_pyramid(pyramid):
-    """Create a single image by vertically stacking the levels of a pyramid."""
-    shape = np.atleast_3d(pyramid[0]).shape[:-1]  # need num rows & cols only
-    img_stack = [cv2.resize(layer, shape[::-1],
-                            interpolation=3) for layer in pyramid]
-    return np.vstack(img_stack).astype(np.uint8)
-    
-def laplacian_blend(white_image, black_image, mask):
-    b_img = np.atleast_3d(black_image).astype(np.float) / 255.
-    w_img = np.atleast_3d(white_image).astype(np.float) / 255.
-    m_img = np.atleast_3d(mask).astype(np.float) / 255.
-    num_channels = b_img.shape[-1]
-
-    imgs = []
-    for channel in range(num_channels):
-        imgs.append(run_blend(b_img[:, :, channel],
-                              w_img[:, :, channel],
-                              m_img[:, :, channel]))
-
-    names = ['gauss_pyr_black', 'gauss_pyr_white', 'gauss_pyr_mask',
-             'lapl_pyr_black', 'lapl_pyr_white', 'outpyr', 'outimg']
-
-    for name, img_stack in zip(names, zip(*imgs)):
-        imgs = map(np.dstack, zip(*img_stack))
-        stack = [cv2.normalize(img, img, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX) for img in imgs]
-        cv2.imwrite(name + '.png', viz_pyramid(stack))
-    
 
 for i in range(int(sys.argv[1])):
+    print("{0}...".format(i))
     # Read images
     if i == 0:
         dst = cv2.imread("stylized.jpg")
