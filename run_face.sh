@@ -1,12 +1,7 @@
 # convert /home/varun/projects/posterize/input.jpg -resize 512x512! /home/varun/projects/posterize/input.jpg
 
-cd /home/varun/projects/deepmask
-th computeProposals.lua pretrained/sharpmask -img ../posterize/input.jpg
-mv mask_*.jpg ../posterize/masks/
-cp num_masks ../posterize/masks/
-
-# cd /home/varun/projects/posterize
-# python2 generate_face_mask_segmentations.py input.jpg
+cd /home/varun/projects/posterize
+python2 generate_face_mask_segmentations.py input.jpg
 
 # Texture Net
 cd ../texture_nets
